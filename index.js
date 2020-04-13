@@ -20,7 +20,9 @@ express()
       if (err) {
         console.log(err);
       } else {
-        res.json(result.rows)
+        client.query('SELECT * FROM quiz_table_test', function (err, result) {
+          res.json(result.rows)
+        });
       }
     })
   })
