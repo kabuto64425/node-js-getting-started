@@ -13,7 +13,7 @@ var pool = pg.Pool ({
 
 pool.connect(function(err, client, done) {
   if (err) {
-    console.log('err');
+    console.log(err);
   } else {
     console.log('success');
   }
