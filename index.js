@@ -11,13 +11,13 @@ var pool = pg.Pool ({
   password: process.env.ENV_PASSWORD,
 });
 
-pool.connect(process.env.DATABASE_URL, function(err, client, done) {
+/*pool.connect(process.env.DATABASE_URL, function(err, client, done) {
   if (err) {
     console.log('err');
   } else {
     console.log('success');
   }
-});
+});*/
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
