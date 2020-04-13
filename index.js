@@ -13,11 +13,9 @@ exports.pool = pg.Pool ({
 
 exports.pool.connect((err, client) => {
   if (err) {
-    //console.log(err);
+    console.log('err');
   } else {
-    client.query('SELECT * FROM quiz_table_test', (err, result) => {
-      console.log(result.rows);
-    });
+    console.log('success');
   }
 });
 
