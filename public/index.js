@@ -5,28 +5,7 @@ var postponement = 2; //ストップしてから文字を表示し続ける猶�
 /* ----- option ----- */
 
 /* ----- quiz ----- */
-var quizzes = [
-    {
-      question: "1:「なぜ山に登るのか」と尋ねられて「そこに山があるから」と答えた逸話で知られる、イギリスの登山家は誰でしょう？",
-      answer: "ジョージ・マロリー"
-    },
-    {
-      question: "2:「なぜ山に登るのか」と尋ねられて「そこに山があるから」と答えた逸話で知られる、イギリスの登山家は誰でしょう？",
-      answer: "ジョージ・マロリー"
-    },
-    {
-      question: "3:「なぜ山に登るのか」と尋ねられて「そこに山があるから」と答えた逸話で知られる、イギリスの登山家は誰でしょう？",
-      answer: "ジョージ・マロリー"
-    },
-    {
-      question: "4:「なぜ山に登るのか」と尋ねられて「そこに山があるから」と答えた逸話で知られる、イギリスの登山家は誰でしょう？",
-      answer: "ジョージ・マロリー"
-    },
-    {
-      question: "5:「なぜ山に登るのか」と尋ねられて「そこに山があるから」と答えた逸話で知られる、イギリスの登山家は誰でしょう？",
-      answer: "ジョージ・マロリー"
-    }
-]
+var quizzes;
 /* ----- quiz ----- */
 
 var questionElement = document.getElementById('question');
@@ -46,7 +25,8 @@ xmlHttpRequest.onreadystatechange = function()
     {
         if( this.response )
         {
-            console.log(this.response[0].question);
+            console.log(this.response[0].question)
+            quizzes = this.response
             // 読み込んだ後処理したい内容をかく
         }
     }
