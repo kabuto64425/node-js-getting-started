@@ -46,7 +46,7 @@ xmlHttpRequest.onreadystatechange = function()
     {
         if( this.response )
         {
-            console.log(this.response[0]);
+            console.log(this.response[0].question);
             // 読み込んだ後処理したい内容をかく
         }
     }
