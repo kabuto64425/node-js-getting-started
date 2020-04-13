@@ -3,7 +3,7 @@ const path = require('path')
 const pg = require('pg')
 const PORT = process.env.PORT || 5000
 
-exports.pool = pg.Pool ({
+pool = pg.Pool ({
   host: process.env.ENV_HOST,
   databese: process.env.ENV_DATABASE,
   user: process.env.ENV_USER,
@@ -11,13 +11,7 @@ exports.pool = pg.Pool ({
   password: process.env.ENV_PASSWORD,
 });
 
-pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-  if (err) {
-    console.log('err');
-  }
-});
-
-exports.pool.connect((err, client) => {
+pool.connect(process.env.DATABASE_URL, function(err, client, done) {
   if (err) {
     console.log('err');
   } else {
