@@ -20,9 +20,7 @@ express()
       if (err) {
         console.log(err);
       } else {
-        client.query('SELECT * FROM quiz_table_test', function (err, result) {
-          console.log(result.rows); //コンソール上での確認用なため、この1文は必須ではない。
-        });
+        res.json(result.rows)
       }
     })
   })
