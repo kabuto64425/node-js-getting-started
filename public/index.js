@@ -98,7 +98,6 @@ Array.from(document.getElementsByTagName("a")).forEach(element => {
 });
 
 function itimozi(postponement){ //　一文字ずつ表示させる
-  console.log(postponement);
   
   if(postponement < 0) {
     phase = PHASES.INANSWER;
