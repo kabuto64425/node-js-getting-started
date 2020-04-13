@@ -3,7 +3,7 @@ const path = require('path')
 const pg = require('pg')
 const PORT = process.env.PORT || 5000
 
-pool = pg.Pool ({
+var pool = pg.Pool ({
   host: process.env.ENV_HOST,
   databese: process.env.ENV_DATABASE,
   user: process.env.ENV_USER,
