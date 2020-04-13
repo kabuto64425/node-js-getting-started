@@ -11,9 +11,15 @@ exports.pool = pg.Pool ({
   password: process.env.ENV_PASSWORD,
 });
 
+pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+  if (err) {
+    console.log('err');
+  }
+});
+
 exports.pool.connect((err, client) => {
   if (err) {
-    console.log(err);
+    console.log('err');
   } else {
     console.log('success');
   }
