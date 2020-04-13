@@ -6,7 +6,7 @@ express()
   .use(express.static(path.join(__dirname, 'public')))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-//console.log(process.env.ENV_HOST);
+console.log(process.env.ENV_HOST);
 
 /*express()
   .use(express.static(path.join(__dirname, 'public')))
