@@ -16,19 +16,17 @@ pool.connect(function(err, client, done) {
     console.log(err);
   } else {
     client.query('SELECT * FROM quiz_table_test', function (err, result) {
-      console.log(result); //コンソール上での確認用なため、この1文は必須ではない。
+      //console.log(result); //コンソール上での確認用なため、この1文は必須ではない。
     });
   }
 });
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
+  .get('/get', function(req,res) {
+    console.log('get')
+  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-
-console.log(process.env.ENV_HOST);
-console.log(process.env.ENV_DATABASE);
-console.log(process.env.ENV_USER);
-console.log(process.env.ENV_PASSWORD);
 
 /*express()
   .use(express.static(path.join(__dirname, 'public')))
