@@ -39,6 +39,23 @@ var questionDisplayingTextCount = 0;
 
 quizIndex = 0;
 
+var xmlHttpRequest = new XMLHttpRequest();
+xmlHttpRequest.onreadystatechange = function()
+{
+    if( this.readyState == 4 && this.status == 200 )
+    {
+        if( this.response )
+        {
+            console.log(this.response);
+            // 読み込んだ後処理したい内容をかく
+        }
+    }
+}
+
+xmlHttpRequest.open( 'GET', 'https://higasumi52-20200410.herokuapp.com/get', true );
+xmlHttpRequest.responseType = 'json';
+xmlHttpRequest.send( null );
+
 window.onload = function(){
   kamikakushi(quizzes[quizIndex]);
   itimozi(postponement);
