@@ -13,7 +13,7 @@ exports.pool = pg.Pool ({
 
 exports.pool.connect((err, client) => {
   if (err) {
-    console.log('err');
+    console.log(err);
   } else {
     console.log('success');
   }
