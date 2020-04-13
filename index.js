@@ -1,11 +1,14 @@
 const express = require('express')
 const path = require('path')
-const {Client} = require('pg')
+const pg = require('pg');
+require('dotenv').config();
 const PORT = process.env.PORT || 5000
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+console.log(process.env.ENV_HOST);
 
 /*express()
   .use(express.static(path.join(__dirname, 'public')))
