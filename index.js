@@ -11,6 +11,16 @@ exports.pool = pg.Pool ({
   password: process.env.ENV_PASSWORD,
 });
 
+db.pool.connect((err, client) => {
+  if (err) {
+    console.log(err);
+  } else {
+    client.query('SELECT * FROM quiz_table_test', (err, result) => {
+      console.log(result.rows);
+    });
+  }
+});
+
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
