@@ -4,11 +4,11 @@ const pg = require('pg')
 const PORT = process.env.PORT || 5000
 
 var pool = pg.Pool ({
-  host: 'ec2-34-204-22-76.compute-1.amazonaws.com',
-  databese: 'd4t9vmtvadroi7',
-  user: 'jzcqnyvlmwovjp',
+  host: process.env.ENV_HOST,
+  database: process.env.ENV_DATABASE,
+  user: process.env.ENV_USER,
   port: 5432,
-  password: 'b249ce1d8b423de80a9ae5fe0bb6d588d0154d183a627265b0a24ebb07a3f51f',
+  password: process.env.ENV_PASSWORD,
 });
 
 pool.connect(function(err, client, done) {
