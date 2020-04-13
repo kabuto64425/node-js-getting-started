@@ -29,6 +29,9 @@ xmlHttpRequest.onreadystatechange = function()
           // 読み込んだ後処理したい内容をかく
           quizzes = this.response
           console.log(quizzes)
+          kamikakushi(quizzes[quizIndex]);
+          itimozi(postponement);
+          quizIndex++;
         }
     }
 }
@@ -36,12 +39,6 @@ xmlHttpRequest.onreadystatechange = function()
 xmlHttpRequest.open( 'GET', 'https://higasumi52-20200410.herokuapp.com/get', true );
 xmlHttpRequest.responseType = 'json';
 xmlHttpRequest.send( null );
-
-window.onload = function(){
-  kamikakushi(quizzes[quizIndex]);
-  itimozi(postponement);
-  quizIndex++;
-}
  
 function kamikakushi(quiz){ // 要素を変数に保持させ、非表示にする
   questionText = quiz.question;
