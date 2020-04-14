@@ -21,6 +21,7 @@ express()
         console.log(err);
       } else {
         client.query('SELECT * FROM quiz_table_test', function (err, result) {
+          done();
           res.json(result.rows)
         });
       }
