@@ -18,9 +18,9 @@ express()
   .get('/get', function(req,res) {
     pool.connect(function(err, client, done) {
       if (err) {
-        console.log(err);
+        console.log(err)
       } else {
-        client.query('SELECT * FROM quiz_table_test', function (err, result) {
+        client.query('SELECT * FROM quiz_table', function (err, result) {
           done();
           res.json(result.rows)
         });
