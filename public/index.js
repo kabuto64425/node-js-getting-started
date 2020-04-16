@@ -25,10 +25,8 @@ xmlHttpRequest.onreadystatechange = function()
     {
         if( this.response )
         {
-          console.log(this.response)
           // 読み込んだ後処理したい内容をかく
           quizzes = this.response
-          console.log(quizzes)
           kamikakushi(quizzes[quizIndex]);
           itimozi(postponement);
           quizIndex++;
