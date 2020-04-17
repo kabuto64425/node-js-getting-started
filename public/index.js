@@ -1,24 +1,26 @@
+'use strict';
 /* ----- option ----- */
-var txSp = 100; // テキストの表示速度
-var dly = 1000; // 次の文章までの待ち時間
-var postponement = 2; //ストップしてから文字を表示し続ける猶予文字
+let txSp = 100; // テキストの表示速度
+let dly = 1000; // 次の文章までの待ち時間
+let postponement = 2; //ストップしてから文字を表示し続ける猶予文字
 /* ----- option ----- */
 
 /* ----- quiz ----- */
-var quizzes;
+let quizzes;
 /* ----- quiz ----- */
 
-var questionElement = document.getElementById('question');
-var answerElement = document.getElementById('answer');
+const questionElement = document.getElementById('question');
+const answerElement = document.getElementById('answer');
+const mainButtonElement = document.getElementById('mainButton');
 
-var questionText;
-var answerText;
+let questionText;
+let answerText;
 
-var questionDisplayingTextCount = 0;
+let questionDisplayingTextCount = 0;
 
-quizIndex = 0;
+let quizIndex = 0;
 
-var xmlHttpRequest = new XMLHttpRequest();
+let xmlHttpRequest = new XMLHttpRequest();
 xmlHttpRequest.onreadystatechange = function()
 {
     if( this.readyState == 4 && this.status == 200 )
@@ -46,37 +48,73 @@ function kamikakushi(quiz){ // 要素を変数に保持させ、非表示にす�
   answerElement.textContent = '';
 }
 
-var PHASES = {
-    READINGQUESTION : 'readingQuestion',
-    READTHROUGHQUESTION : 'readThroughQuestion',
-    STOPPINGQUESTION: 'stoppingQuestion',
-    INANSWER : 'inAnswer',
-    FULLVIEW : 'fullView'
+const PHASES = {
+    READINGQUESTION : {
+      name: 'readingQuestion',
+      mainButtonText: 'Slash'
+    },
+    READTHROUGHQUESTION : {
+      name: 'readThroughQuestion',
+      mainButtonText: 'Slash'
+    },
+    STOPPINGQUESTION: {
+      name: 'stoppingQuestion',
+      mainButtonText: 'Slash'
+    },
+    INANSWER : {
+      name: 'inAnswer',
+      mainButtonText: 'Answer'
+    },
+    FULLVIEW : {
+      name: 'fullView',
+      mainButtonText: 'Next'
+    }
 };
 
-var phase = PHASES.READINGQUESTION;
+function watchValue(obj, propName, func) {
+  let value = obj[propName];
+  Object.defineProperty(obj, propName, {
+      get: () => value,
+      set: newValue => {
+          const oldValue = value;
+          value = newValue;
+          func(oldValue, newValue);
+      },
+      configurable: true
+  });
+}
 
-var isStoped = false;
+let phase = {
+  property: PHASES.READINGQUESTION
+};
+
+watchValue(phase, 'property', function(oldValue, newValue) {
+  mainButtonElement.textContent = newValue.mainButtonText;
+});
+
+//let phase = PHASES.READINGQUESTION;
+
+let isStoped = false;
 
 Array.from(document.getElementsByTagName("a")).forEach(element => {
   element.addEventListener("click", function(event) {
     event.preventDefault();
-    if(phase == PHASES.READINGQUESTION) {
-      phase = PHASES.STOPPINGQUESTION;
+    if(phase.property == PHASES.READINGQUESTION) {
+      phase.property = PHASES.STOPPINGQUESTION;
       return;
     }
-    if(phase == PHASES.READTHROUGHQUESTION) {
-      phase = PHASES.INANSWER;
+    if(phase.property == PHASES.READTHROUGHQUESTION) {
+      phase.property = PHASES.INANSWER;
       return;
     }
-    if(phase == PHASES.INANSWER) {
-      phase = PHASES.FULLVIEW;
+    if(phase.property == PHASES.INANSWER) {
+      phase.property = PHASES.FULLVIEW;
       questionElement.textContent = questionText;
       answerElement.textContent = answerText;
       return;
     }
-    if(phase == PHASES.FULLVIEW) {
-      phase = PHASES.READINGQUESTION;
+    if(phase.property == PHASES.FULLVIEW) {
+      phase.property = PHASES.READINGQUESTION;
       if(quizIndex >= quizzes.length) {
         quizIndex = 0;
       }
@@ -93,7 +131,7 @@ Array.from(document.getElementsByTagName("a")).forEach(element => {
 function itimozi(postponement){ //　一文字ずつ表示させる
   
   if(postponement < 0) {
-    phase = PHASES.INANSWER;
+    phase.property = PHASES.INANSWER;
     return;
   }
   
@@ -101,17 +139,17 @@ function itimozi(postponement){ //　一文字ずつ表示させる
 
   if(questionText.length != questionDisplayingTextCount){ // Count が初期の文字列の文字数と同じになるまでループ
     setTimeout(function() {
-      if(phase == PHASES.STOPPINGQUESTION) {
+      if(phase.property == PHASES.STOPPINGQUESTION) {
         itimozi(--postponement);
       } else {
         itimozi(postponement);
       }
     }, txSp); // 次の文字へ進む
   } else {
-    if(phase == PHASES.STOPPINGQUESTION) {
-      phase = PHASES.INANSWER;
+    if(phase.property == PHASES.STOPPINGQUESTION) {
+      phase.property = PHASES.INANSWER;
     } else {
-      phase = PHASES.READTHROUGHQUESTION;
+      phase.property = PHASES.READTHROUGHQUESTION;
     }
   }
 }
