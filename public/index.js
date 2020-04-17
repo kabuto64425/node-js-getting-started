@@ -38,7 +38,7 @@ xmlHttpRequest.onreadystatechange = function()
     }
 }
 
-xmlHttpRequest.open( 'GET', 'https://higasumi52-20200410.herokuapp.com/get', true );
+xmlHttpRequest.open( 'GET', 'https://higasumi52-20200417.herokuapp.com/get', true );
 xmlHttpRequest.responseType = 'json';
 xmlHttpRequest.send( null );
  
