@@ -11,10 +11,12 @@ let quizzes;
 
 const questionElement = document.getElementById('question');
 const answerElement = document.getElementById('answer');
+const supplementElement = document.getElementById('supplement');
 const mainButtonElement = document.getElementById('mainButton');
 
 let questionText;
 let answerText;
+let supplementText;
 
 let questionDisplayingTextCount = 0;
 
@@ -46,6 +48,9 @@ function kamikakushi(quiz){ // 要素を変数に保持させ、非表示にす�
 
   answerText = quiz.answer;
   answerElement.textContent = '';
+
+  supplementText = quiz.supplement;
+  supplementElement.textContent = '';
 }
 
 const PHASES = {
@@ -111,6 +116,7 @@ Array.from(document.getElementsByTagName("a")).forEach(element => {
       phase.property = PHASES.FULLVIEW;
       questionElement.textContent = questionText;
       answerElement.textContent = answerText;
+      supplementElement.textContent = supplementText;
       return;
     }
     if(phase.property == PHASES.FULLVIEW) {
