@@ -20,7 +20,7 @@ express()
       if (err) {
         console.log(err)
       } else {
-        client.query('select * from quiz_table_starting order by random()', function (err, result) {
+        client.query('select * from quiz_table order by random()', function (err, result) {
           done();
           res.json(result.rows)
         });
