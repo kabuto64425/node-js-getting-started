@@ -1,9 +1,9 @@
-const express = require('express')
-const http = require('http').Server(express)
-const io = require('socket.io')(http)
-const path = require('path')
-const pg = require('pg')
-const PORT = process.env.PORT || 5000
+const express = require('express');
+const http = require('http').Server(express);
+const io = require('socket.io')(http);
+const path = require('path');
+const pg = require('pg');
+const PORT = process.env.PORT || 5000;
 
 var pool = pg.Pool ({
   host: process.env.ENV_HOST,
@@ -15,25 +15,26 @@ var pool = pg.Pool ({
 
 io.on('connection', function (socket) {
   socket.on('sending message', function (msg) {
-    console.log('sending message')
-  })
-})
+    console.log('sending message');
+  });
+});
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .get('/get', function(req,res) {
     pool.connect(function(err, client, done) {
       if (err) {
-        console.log(err)
+        console.log(err);
       } else {
         client.query('select * from quiz_table order by random()', function (err, result) {
           done();
-          res.json(result.rows)
+          res.json(result.rows);
         });
       }
-    })
-  })
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+    });
+  });
+  
+http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 /*express()
   .use(express.static(path.join(__dirname, 'public')))
