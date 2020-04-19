@@ -1,5 +1,5 @@
 const express = require('express')
-const http = require('http').Server(app)
+const http = require('http').Server(express)
 const io = require('socket.io')(http)
 const path = require('path')
 const pg = require('pg')
