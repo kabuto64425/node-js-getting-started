@@ -32,9 +32,7 @@ express()
         });
       }
     });
-  });
-  
-http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  }).listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 /*express()
   .use(express.static(path.join(__dirname, 'public')))
