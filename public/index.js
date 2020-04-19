@@ -159,3 +159,6 @@ function itimozi(postponement){ //　一文字ずつ表示させる
     }
   }
 }
+
+const socket = io();
+socket.emit('sending message', 'aaaa');

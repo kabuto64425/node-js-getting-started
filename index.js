@@ -1,5 +1,6 @@
 const express = require('express')
-const http = require('http')
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
 const path = require('path')
 const pg = require('pg')
 const PORT = process.env.PORT || 5000
@@ -12,7 +13,11 @@ var pool = pg.Pool ({
   password: process.env.ENV_PASSWORD,
 });
 
-
+io.on('connection', function (socket) {
+  socket.on('sending message', function (msg) {
+    console.log('sending message')
+  })
+})
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
