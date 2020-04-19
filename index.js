@@ -1,5 +1,5 @@
-const express = require('express');
-const http = require('http').Server(express);
+const app = require('express')();
+const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const path = require('path');
 const pg = require('pg');
@@ -19,8 +19,7 @@ io.on('connection', function (socket) {
   });
 });
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
   .get('/get', function(req,res) {
     pool.connect(function(err, client, done) {
       if (err) {
@@ -32,7 +31,9 @@ express()
         });
       }
     });
-  }).listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  });
+
+http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 /*express()
   .use(express.static(path.join(__dirname, 'public')))
