@@ -161,4 +161,8 @@ function itimozi(postponement){ //　一文字ずつ表示させる
 }
 
 const socket = io();
-socket.emit('sending message', 'aaaa');
+socket.emit('sending message', '物事が間近に迫っていることを、ある時間の単位を用いて「何読み」というでしょう？');
+
+socket.on('sending message', function(msg) {
+  console.log(msg);
+});

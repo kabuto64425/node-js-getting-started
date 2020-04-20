@@ -17,6 +17,7 @@ var pool = pg.Pool ({
 io.on('connection', function (socket) {
   socket.on('sending message', function (msg) {
     console.log('sending message');
+    io.emit('sending message', msg);
   });
 });
 
