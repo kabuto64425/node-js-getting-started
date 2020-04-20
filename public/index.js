@@ -168,5 +168,6 @@ question2
 const question2Element = document.getElementById('question2');
 
 socket.on('sending message', function(msg) {
+  console.log(msg);
   question2Element.contentText = msg;
 });
