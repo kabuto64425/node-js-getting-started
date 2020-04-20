@@ -14,6 +14,10 @@ var pool = pg.Pool ({
   password: process.env.ENV_PASSWORD,
 });
 
+/* ----- option ----- */
+let txSp = 100; // テキストの表示速度
+/* ----- option ----- */
+
 let questionText;
 let questionDisplayingTextCount = 0;
 
@@ -26,8 +30,7 @@ io.on('connection', function (socket) {
       io.emit('sending message', questionText.substr( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
     
       if(questionText.length != questionDisplayingTextCount){ // Count が初期の文字列の文字数と同じになるまでループ
-        io.emit('sending message', questionText.substr( 0, questionText.length ));
-        /*setTimeout(function() {
+        setTimeout(function() {
             itimozi(postponement);
         }, txSp); // 次の文字へ進む*/
       }
