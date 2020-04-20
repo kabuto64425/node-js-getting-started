@@ -14,10 +14,41 @@ var pool = pg.Pool ({
   password: process.env.ENV_PASSWORD,
 });
 
+let questionText;
+let questionDisplayingTextCount = 0;
+
 io.on('connection', function (socket) {
   socket.on('sending message', function (msg) {
-    console.log('sending message');
-    io.emit('sending message', msg);
+    questionText = msg;
+
+    function itimozi(postponement){ //　一文字ずつ表示させる
+  
+      if(postponement < 0) {
+        phase.property = PHASES.INANSWER;
+        return;
+      }
+      
+      io.emit('sending message', questionText.substr( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
+    
+      if(questionText.length != questionDisplayingTextCount){ // Count が初期の文字列の文字数と同じになるまでループ
+        setTimeout(function() {
+          if(phase.property == PHASES.STOPPINGQUESTION) {
+            itimozi(--postponement);
+          } else {
+            itimozi(postponement);
+          }
+        }, txSp); // 次の文字へ進む
+      } else {
+        if(phase.property == PHASES.STOPPINGQUESTION) {
+          phase.property = PHASES.INANSWER;
+        } else {
+          phase.property = PHASES.READTHROUGHQUESTION;
+        }
+      }
+    };
+
+    itimozi(2);
+
   });
 });
 
