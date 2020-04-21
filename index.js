@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
 
     function itimozi(postponement){ //　一文字ずつ表示させる
       
-      io.emit('sending message', questionText.charAt( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
+      io.emit('sending message', questionText.substr( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
       
       if(questionDisplayingTextCount < questionText.length){ // Count が初期の文字列の文字数と同じになるまでループ
         setTimeout(function() {
