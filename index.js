@@ -68,8 +68,33 @@ io.on('connection', function (socket) {
   });
 
   socket.on('slash', function(msg) {
-    phase.property = PHASES.STOPPINGQUESTION;
-    console.log(phase.property);
+    /*if(phase.property == PHASES.READINGQUESTION) {
+      phase.property = PHASES.STOPPINGQUESTION;
+      return;
+    }
+    if(phase.property == PHASES.READTHROUGHQUESTION) {
+      phase.property = PHASES.INANSWER;
+      return;
+    }
+    if(phase.property == PHASES.INANSWER) {
+      phase.property = PHASES.FULLVIEW;
+      questionElement.textContent = questionText;
+      answerElement.textContent = answerText;
+      supplementElement.textContent = supplementText;
+      return;
+    }
+    if(phase.property == PHASES.FULLVIEW) {
+      phase.property = PHASES.READINGQUESTION;
+      if(quizIndex >= quizzes.length) {
+        quizIndex = 0;
+      }
+  
+      kamikakushi(quizzes[quizIndex]);
+      questionDisplayingTextCount = 0;
+      itimozi(postponement);
+      quizIndex++;
+      return;
+    }*/
   });
 });
 
