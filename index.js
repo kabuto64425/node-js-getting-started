@@ -71,12 +71,27 @@ io.on('connection', function (socket) {
 
     function itimozi(postponement){ //　一文字ずつ表示させる
       
+      if(postponement < 0) {
+        phase.property = PHASES.INANSWER;
+        return;
+      }
+
       io.emit('sending message', questionText.substr( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
       
       if(questionDisplayingTextCount < questionText.length){ // Count が初期の文字列の文字数と同じになるまでループ
         setTimeout(function() {
+          if(phase.property == PHASES.STOPPINGQUESTION) {
+            itimozi(--postponement);
+          } else {
             itimozi(postponement);
+          }
         }, txSp); // 次の文字へ進む*/
+      } else {
+        if(phase.property == PHASES.STOPPINGQUESTION) {
+          phase.property = PHASES.INANSWER;
+        } else {
+          phase.property = PHASES.READTHROUGHQUESTION;
+        }
       }
     };
 
