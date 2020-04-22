@@ -15,7 +15,7 @@ const supplementElement = document.getElementById('supplement');
 const mainButtonElement = document.getElementById('mainButton');
 const mainButton2Element = document.getElementById('mainButton2');
 
-mainButton2Element.addEventListener(function(event) {
+mainButton2Element.addEventListener('click', function(event) {
   event.preventDefault();
 });
 
@@ -106,7 +106,7 @@ watchValue(phase, 'property', function(oldValue, newValue) {
 
 let isStoped = false;
 
-mainButtonElement.addEventListener("click", function(event) {
+mainButtonElement.addEventListener('click', function(event) {
   event.preventDefault();
   if(phase.property == PHASES.READINGQUESTION) {
     phase.property = PHASES.STOPPINGQUESTION;
@@ -167,7 +167,7 @@ const socket = io();
 
 window.onload = function() {
   socket.emit('sending message', '物事が間近に迫っていることを、ある時間の単位を用いて「何読み」というでしょう？');
-  mainButton2Element.addEventListener(function(event) {
+  mainButton2Element.addEventListener('click', function(event) {
     socket.emit('slash', 'slash');
   });
 };
