@@ -68,7 +68,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('slash', function(msg) {
-    phase.property = STOPPINGQUESTION;
+    phase.property = PHASES.STOPPINGQUESTION;
     console.log(phase.property);
   });
 });
