@@ -77,10 +77,7 @@ io.on('connection', function (socket) {
         return;
       }
 
-      socket.emit('sending message', {
-        test:questionText.substr( 0, ++questionDisplayingTextCount ),
-        test2: true
-      }); // テキストの指定した数の間の要素を表示
+      socket.emit('sending message', questionText.substr( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
       
       if(questionDisplayingTextCount < questionText.length){ // Count が初期の文字列の文字数と同じになるまでループ
         setTimeout(function() {
