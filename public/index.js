@@ -175,6 +175,5 @@ window.onload = function() {
 const question2Element = document.getElementById('question2');
 
 socket.on('sending message', function(msg) {
-  console.log(msg);
-  question2Element.textContent = msg;
+  question2Element.textContent = msg.test;
 });
