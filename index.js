@@ -48,6 +48,23 @@ let phase = {
   property: PHASES.READINGQUESTION
 };
 
+function watchValue(obj, propName, func) {
+  let value = obj[propName];
+  Object.defineProperty(obj, propName, {
+      get: () => value,
+      set: newValue => {
+          const oldValue = value;
+          value = newValue;
+          func(oldValue, newValue);
+      },
+      configurable: true
+  });
+}
+
+watchValue(phase, 'property', function(oldValue, newValue) {
+  console.log(newValue);
+});
+
 io.on('connection', function (socket) {
   socket.on('sending message', function(msg) {
     questionText = msg;
@@ -68,7 +85,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('slash', function(msg) {
-    /*if(phase.property == PHASES.READINGQUESTION) {
+    if(phase.property == PHASES.READINGQUESTION) {
       phase.property = PHASES.STOPPINGQUESTION;
       return;
     }
@@ -78,23 +95,12 @@ io.on('connection', function (socket) {
     }
     if(phase.property == PHASES.INANSWER) {
       phase.property = PHASES.FULLVIEW;
-      questionElement.textContent = questionText;
-      answerElement.textContent = answerText;
-      supplementElement.textContent = supplementText;
       return;
     }
     if(phase.property == PHASES.FULLVIEW) {
       phase.property = PHASES.READINGQUESTION;
-      if(quizIndex >= quizzes.length) {
-        quizIndex = 0;
-      }
-  
-      kamikakushi(quizzes[quizIndex]);
-      questionDisplayingTextCount = 0;
-      itimozi(postponement);
-      quizIndex++;
       return;
-    }*/
+    }
   });
 });
 
