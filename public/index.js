@@ -101,37 +101,35 @@ watchValue(phase, 'property', function(oldValue, newValue) {
 
 let isStoped = false;
 
-Array.from(document.getElementsByTagName("a")).forEach(element => {
-  element.addEventListener("click", function(event) {
-    event.preventDefault();
-    if(phase.property == PHASES.READINGQUESTION) {
-      phase.property = PHASES.STOPPINGQUESTION;
-      return;
+mainButtonElement.addEventListener("click", function(event) {
+  event.preventDefault();
+  if(phase.property == PHASES.READINGQUESTION) {
+    phase.property = PHASES.STOPPINGQUESTION;
+    return;
+  }
+  if(phase.property == PHASES.READTHROUGHQUESTION) {
+    phase.property = PHASES.INANSWER;
+    return;
+  }
+  if(phase.property == PHASES.INANSWER) {
+    phase.property = PHASES.FULLVIEW;
+    questionElement.textContent = questionText;
+    answerElement.textContent = answerText;
+    supplementElement.textContent = supplementText;
+    return;
+  }
+  if(phase.property == PHASES.FULLVIEW) {
+    phase.property = PHASES.READINGQUESTION;
+    if(quizIndex >= quizzes.length) {
+      quizIndex = 0;
     }
-    if(phase.property == PHASES.READTHROUGHQUESTION) {
-      phase.property = PHASES.INANSWER;
-      return;
-    }
-    if(phase.property == PHASES.INANSWER) {
-      phase.property = PHASES.FULLVIEW;
-      questionElement.textContent = questionText;
-      answerElement.textContent = answerText;
-      supplementElement.textContent = supplementText;
-      return;
-    }
-    if(phase.property == PHASES.FULLVIEW) {
-      phase.property = PHASES.READINGQUESTION;
-      if(quizIndex >= quizzes.length) {
-        quizIndex = 0;
-      }
 
-      kamikakushi(quizzes[quizIndex]);
-      questionDisplayingTextCount = 0;
-      itimozi(postponement);
-      quizIndex++;
-      return;
-    }
-  });
+    kamikakushi(quizzes[quizIndex]);
+    questionDisplayingTextCount = 0;
+    itimozi(postponement);
+    quizIndex++;
+    return;
+  }
 });
 
 function itimozi(postponement){ //　一文字ずつ表示させる
@@ -159,6 +157,8 @@ function itimozi(postponement){ //　一文字ずつ表示させる
     }
   }
 }
+
+const question2Element = document.getElementById('question2');
 
 const socket = io();
 
