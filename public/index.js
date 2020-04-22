@@ -15,6 +15,10 @@ const supplementElement = document.getElementById('supplement');
 const mainButtonElement = document.getElementById('mainButton');
 const mainButton2Element = document.getElementById('mainButton2');
 
+mainButton2Element.addEventListener(function(event) {
+  event.preventDefault();
+});
+
 let questionText;
 let answerText;
 let supplementText;
@@ -163,6 +167,9 @@ const socket = io();
 
 window.onload = function() {
   socket.emit('sending message', '物事が間近に迫っていることを、ある時間の単位を用いて「何読み」というでしょう？');
+  mainButton2Element.addEventListener(function(event) {
+    socket.emit('slash', 'slash');
+  });
 };
 
 const question2Element = document.getElementById('question2');

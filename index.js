@@ -22,7 +22,7 @@ let questionText;
 let questionDisplayingTextCount = 0;
 
 io.on('connection', function (socket) {
-  socket.on('sending message', function (msg) {
+  socket.on('sending message', function(msg) {
     questionText = msg;
 
     function itimozi(postponement){ //　一文字ずつ表示させる
@@ -38,6 +38,10 @@ io.on('connection', function (socket) {
 
     itimozi(2);
 
+  });
+
+  socket.on('slash', function(msg) {
+    console.log(msg);
   });
 });
 
