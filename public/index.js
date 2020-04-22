@@ -13,6 +13,7 @@ const questionElement = document.getElementById('question');
 const answerElement = document.getElementById('answer');
 const supplementElement = document.getElementById('supplement');
 const mainButtonElement = document.getElementById('mainButton');
+const mainButton2Element = document.getElementById('mainButton2');
 
 let questionText;
 let answerText;
@@ -157,8 +158,6 @@ function itimozi(postponement){ //　一文字ずつ表示させる
     }
   }
 }
-
-const question2Element = document.getElementById('question2');
 
 const socket = io();
 
