@@ -22,23 +22,20 @@ let questionText;
 let questionDisplayingTextCount = 0;
 
 io.on('connection', function (socket) {
-  socket.on('sending message', function (msg) {
-    questionText = msg;
+  questionText = '物事が間近に迫っていることを、ある時間の単位を用いて「何読み」というでしょう？';
 
-    function itimozi(postponement){ //　一文字ずつ表示させる
+  function itimozi(postponement){ //　一文字ずつ表示させる
       
-      io.emit('sending message', questionText.substr( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
-      
-      if(questionDisplayingTextCount < questionText.length){ // Count が初期の文字列の文字数と同じになるまでループ
-        setTimeout(function() {
-            itimozi(postponement);
-        }, txSp); // 次の文字へ進む*/
-      }
-    };
+    io.emit('sending message', questionText.substr( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
+     
+    if(questionDisplayingTextCount < questionText.length){ // Count が初期の文字列の文字数と同じになるまでループ
+      setTimeout(function() {
+          itimozi(postponement);
+      }, txSp); // 次の文字へ進む*/
+    }
+  };
 
-    itimozi(2);
-
-  });
+  itimozi(2);
 });
 
 app.use(express.static(path.join(__dirname, 'public')))
