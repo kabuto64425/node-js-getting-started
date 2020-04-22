@@ -21,6 +21,33 @@ let txSp = 100; // テキストの表示速度
 let questionText;
 let questionDisplayingTextCount = 0;
 
+const PHASES = {
+  READINGQUESTION : {
+    name: 'readingQuestion',
+    mainButtonText: 'Slash'
+  },
+  READTHROUGHQUESTION : {
+    name: 'readThroughQuestion',
+    mainButtonText: 'Slash'
+  },
+  STOPPINGQUESTION: {
+    name: 'stoppingQuestion',
+    mainButtonText: 'Slash'
+  },
+  INANSWER : {
+    name: 'inAnswer',
+    mainButtonText: 'Answer'
+  },
+  FULLVIEW : {
+    name: 'fullView',
+    mainButtonText: 'Next'
+  }
+};
+
+let phase = {
+  property: PHASES.READINGQUESTION
+};
+
 io.on('connection', function (socket) {
   socket.on('sending message', function(msg) {
     questionText = msg;
@@ -41,7 +68,8 @@ io.on('connection', function (socket) {
   });
 
   socket.on('slash', function(msg) {
-    console.log(msg);
+    phase.property = STOPPINGQUESTION;
+    console.log(phase.property);
   });
 });
 
