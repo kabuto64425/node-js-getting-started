@@ -162,6 +162,10 @@ function itimozi(postponement){ //　一文字ずつ表示させる
 
 const socket = io();
 
+window.onload(function() {
+  socket.emit('sending message', '物事が間近に迫っていることを、ある時間の単位を用いて「何読み」というでしょう？');
+});
+
 const question2Element = document.getElementById('question2');
 
 socket.on('sending message', function(msg) {
