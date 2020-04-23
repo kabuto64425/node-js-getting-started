@@ -66,39 +66,35 @@ watchValue(phase, 'property', function(oldValue, newValue) {
 });
 
 io.on('connection', function (socket) {
+  questionText = '物事が間近に迫っていることを、ある時間の単位を用いて「何読み」というでしょう？';
 
-  socket.on('sending message', function(msg) {
-    questionText = msg;
-
-    function itimozi(postponement){ //　一文字ずつ表示させる
+  function itimozi(postponement){ //　一文字ずつ表示させる
       
-      if(postponement < 0) {
-        phase.property = PHASES.INANSWER;
-        return;
-      }
+    if(postponement < 0) {
+      phase.property = PHASES.INANSWER;
+      return;
+    }
 
-      socket.emit('sending message', questionText.substr( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
-      
-      if(questionDisplayingTextCount < questionText.length){ // Count が初期の文字列の文字数と同じになるまでループ
-        setTimeout(function() {
-          if(phase.property == PHASES.STOPPINGQUESTION) {
-            itimozi(--postponement);
-          } else {
-            itimozi(postponement);
-          }
-        }, txSp); // 次の文字へ進む*/
-      } else {
+    socket.emit('sending message', questionText.substr( 0, ++questionDisplayingTextCount )); // テキストの指定した数の間の要素を表示
+    
+    if(questionDisplayingTextCount < questionText.length){ // Count が初期の文字列の文字数と同じになるまでループ
+      setTimeout(function() {
         if(phase.property == PHASES.STOPPINGQUESTION) {
-          phase.property = PHASES.INANSWER;
+          itimozi(--postponement);
         } else {
-          phase.property = PHASES.READTHROUGHQUESTION;
+          itimozi(postponement);
         }
+      }, txSp); // 次の文字へ進む*/
+    } else {
+      if(phase.property == PHASES.STOPPINGQUESTION) {
+        phase.property = PHASES.INANSWER;
+      } else {
+        phase.property = PHASES.READTHROUGHQUESTION;
       }
-    };
+    }
+  };
 
-    itimozi(2);
-
-  });
+  itimozi(2);
 
   socket.on('slash', function(msg) {
     if(phase.property == PHASES.READINGQUESTION) {

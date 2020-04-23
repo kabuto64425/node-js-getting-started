@@ -165,12 +165,9 @@ function itimozi(postponement){ //　一文字ずつ表示させる
 
 const socket = io();
 
-window.onload = function() {
-  socket.emit('sending message', '物事が間近に迫っていることを、ある時間の単位を用いて「何読み」というでしょう？');
-  mainButton2Element.addEventListener('click', function(event) {
-    socket.emit('slash', 'slash');
-  });
-};
+mainButton2Element.addEventListener('click', function(event) {
+  socket.emit('slash', 'slash');
+});
 
 const question2Element = document.getElementById('question2');
 
