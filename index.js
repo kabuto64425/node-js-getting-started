@@ -120,7 +120,7 @@ app.use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', function(req, res) {
-    let data = {
+    const data = {
       test: 'aaaaaaaaaaaaaaaaaaaaaaaa'
     };
     res.render('pages/index', data);
