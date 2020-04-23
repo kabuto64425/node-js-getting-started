@@ -121,7 +121,7 @@ app.use(express.static(path.join(__dirname, 'public')))
   .set('view engine', 'ejs')
   .get('/', function(req, res) {
     let data = {
-      test: 0
+      test: 'aaaaaaaaaaaaaaaaaaaaaaaa'
     };
     res.render('pages/index', data);
   })
