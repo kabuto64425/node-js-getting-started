@@ -6,6 +6,9 @@ const path = require('path');
 const pg = require('pg');
 const PORT = process.env.PORT || 5000;
 
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 var pool = pg.Pool ({
   host: process.env.ENV_HOST,
   database: process.env.ENV_DATABASE,
