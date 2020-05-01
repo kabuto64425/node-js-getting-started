@@ -4,10 +4,9 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const path = require('path');
 const pg = require('pg');
+require('react');
+require('react-dom');
 const PORT = process.env.PORT || 5000;
-
-import React from 'react'
-import ReactDOM from 'react-dom'
 
 var pool = pg.Pool ({
   host: process.env.ENV_HOST,
