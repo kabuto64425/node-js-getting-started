@@ -4,8 +4,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const path = require('path');
 const pg = require('pg');
-require('react');
-require('react-dom');
+const react = require('react');
+const reactDOM = require('react-dom');
 const PORT = process.env.PORT || 5000;
 
 var pool = pg.Pool ({
