@@ -4,8 +4,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const path = require('path');
 const pg = require('pg');
-const react = require('react');
-const reactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
 const PORT = process.env.PORT || 5000;
 
 var pool = pg.Pool ({
@@ -117,6 +117,14 @@ io.on('connection', function (socket) {
     }
   });
 });
+
+class App extends React.Component{
+  render(){
+    return(
+      <div>Hello World</div>
+    );
+  }
+}
 
 app.use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
